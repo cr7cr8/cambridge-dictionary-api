@@ -130,7 +130,7 @@ async function recordMP3(word, index) {
     const url = `https://dictionary.cambridge.org/us/dictionary/english-chinese-simplified/${word}`
     //console.log(word)
 
-    await superagent.get(url).then(data => {
+    await superagent.get(url).disableTLSCerts().then(data => {
         const html = data.text
         const vocab = cheerioLoad(html)
 
@@ -162,22 +162,17 @@ async function recordMP3(word, index) {
 
 
 
-app.get('/:entry', async (req, res, next) => {
+app.get('/:entry',  (req, res, next) => {
     const entry = req.params.entry
 
     const url = `https://dictionary.cambridge.org/us/dictionary/english-chinese-simplified/${entry}`
 
-    request(url, async (error, response, html) => {
+    // request(url, async (error, response, html) => {
+    //     res.status(200).json(cheerioLoad(html))
+    // })
+    superagent.get(url).disableTLSCerts().then(data=>{
 
-
-        
-     
-
-
-
-        res.status(200).json(cheerioLoad(html))
-
-
+        res.status(200).json(cheerioLoad(data.text))
 
     })
 })
