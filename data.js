@@ -106,13 +106,7 @@ const cheerioLoad = (html) => {
 
 }
 
-const requestGetHtml = (url) => {
 
-    request(url, async (error, response, html) => {
-
-    })
-
-}
 
 const data = fs.readFileSync(path.join("./", "wordlist.txt"))
 const arr = data.toString().split("\r\n")
@@ -165,7 +159,7 @@ async function recordMP3(word, index) {
 app.get('/:entry',  (req, res, next) => {
     const entry = req.params.entry
 
-    const url = `https://dictionary.cambridge.org/us/dictionary/english-chinese-simplified/${entry}`
+    const url = `https://dictionary.cambridge.org/dictionary/english-chinese-simplified/${entry}`
 
     // request(url, async (error, response, html) => {
     //     res.status(200).json(cheerioLoad(html))
